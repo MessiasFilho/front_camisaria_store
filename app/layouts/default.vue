@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-gray-50">
     <!-- Header Moderno -->
-    <header class="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 shadow-xl border-b border-blue-800/20 sticky top-0 z-50">
+    <header class="bg-linear-to-r from-slate-900 via-blue-900 to-slate-900 shadow-xl border-b border-blue-800/20 sticky top-0 z-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Top Bar -->
         <div class="hidden sm:flex justify-between items-center py-2 text-xs text-blue-200">
@@ -26,7 +26,7 @@
         <div class="flex justify-between items-center h-16 sm:h-20">
           <!-- Logo -->
           <div class="flex items-center space-x-2 sm:space-x-3">
-            <div class="bg-gradient-to-br from-blue-400 to-purple-600 p-2 sm:p-3 rounded-lg sm:rounded-xl shadow-lg">
+            <div class="bg-linear-to-br from-blue-400 to-purple-600 p-2 sm:p-3 rounded-lg sm:rounded-xl shadow-lg">
               <Shirt class="w-6 h-6 sm:w-8 sm:h-8 text-white" />
             </div>
             <div class="hidden sm:block">
@@ -64,7 +64,7 @@
             </button>
 
             <!-- Cart -->
-            <button class="relative flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-3 sm:px-4 py-2 rounded-full text-white font-medium transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+            <button class="relative flex items-center space-x-2 bg-linear-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-3 sm:px-4 py-2 rounded-full text-white font-medium transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
               <ShoppingCart class="w-4 h-4 sm:w-5 sm:h-5" />
               <span class="hidden lg:block text-sm">Carrinho</span>
               <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center font-bold">
@@ -99,23 +99,23 @@
         <nav class="hidden lg:flex items-center justify-center space-x-8 py-4 border-t border-blue-800/20">
           <a href="#" class="group flex items-center space-x-2 text-blue-100 hover:text-white px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300 font-medium">
             <Home class="w-4 h-4 group-hover:scale-110 transition-transform duration-200" />
-            <span>Home</span>
+            <span class="text-white">Home</span>
           </a>
           <a href="#" class="group flex items-center space-x-2 text-blue-100 hover:text-white px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300 font-medium">
             <User class="w-4 h-4 group-hover:scale-110 transition-transform duration-200" />
-            <span>Masculino</span>
+            <span class="text-white">Masculino</span>
           </a>
           <a href="#" class="group flex items-center space-x-2 text-blue-100 hover:text-white px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300 font-medium">
             <User class="w-4 h-4 group-hover:scale-110 transition-transform duration-200" />
-            <span>Feminino</span>
+            <span class="text-white">Feminino</span>
           </a>
           <a href="#" class="group flex items-center space-x-2 text-blue-100 hover:text-white px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300 font-medium">
             <Truck class="w-4 h-4 group-hover:scale-110 transition-transform duration-200" />
-            <span>Fardamento</span>
+            <span class="text-white">Fardamento</span>
           </a>
           <a href="#" class="group flex items-center space-x-2 text-blue-100 hover:text-white px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300 font-medium">
             <Star class="w-4 h-4 group-hover:scale-110 transition-transform duration-200" />
-            <span>Destaques</span>
+            <span class="text-white">Destaques</span>
           </a>
         </nav>
 
@@ -137,7 +137,7 @@
             <!-- Mobile Menu Header -->
             <div class="flex items-center justify-between p-6 border-b border-blue-800/20">
               <div class="flex items-center space-x-3">
-                <div class="bg-gradient-to-br from-blue-400 to-purple-600 p-2 rounded-lg">
+                <div class="bg-linear-to-br from-blue-400 to-purple-600 p-2 rounded-lg">
                   <Shirt class="w-6 h-6 text-white" />
                 </div>
                 <h2 class="text-lg font-bold text-white">Menu</h2>

@@ -1,23 +1,21 @@
 <template>
-
-
-  <div class="banner-container">
-    <div class="banner-slider" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
+  <!-- Banner principal - Desktop -->
+  <div class="relative w-full h-[500px] overflow-hidden rounded-xl shadow-2xl shadow-black/10 lg:block hidden">
+    <div class="flex h-full transition-transform duration-700 ease-out" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
       <div
         v-for="(slide, index) in slides"
         :key="index"
-        class="slide"
-        :class="{ active: index === currentSlide }"
+        class="min-w-full h-full relative"
       >
-        <div class="slide-content">
-          <div class="slide-image">
-            <img :src="slide.image" :alt="slide.title" />
-            <div class="slide-overlay"></div>
+        <div class="flex h-full relative">
+          <div class="relative w-3/5 h-full overflow-hidden flex items-center justify-center">
+            <img :src="slide.image" :alt="slide.title" class="max-w-full max-h-full object-contain transition-transform duration-500 ease-out hover:scale-105" />
+            <div class="absolute inset-0 bg-linear-to-br from-black/30 to-black/10"></div>
           </div>
-          <div class="slide-info">
-            <h2 class="slide-title">{{ slide.title }}</h2>
-            <p class="slide-description">{{ slide.description }}</p>
-            <button class="slide-button" @click="handleCategoryClick(slide.category)">
+          <div class="absolute right-0 top-1/2 -translate-y-1/2 w-2/5 p-12 text-white z-10 lg:p-8 xl:p-12">
+            <h2 class="text-5xl font-bold mb-4 drop-shadow-2xl tracking-tight lg:text-4xl xl:text-5xl">{{ slide.title }}</h2>
+            <p class="text-xl mb-8 opacity-90 leading-relaxed lg:text-lg xl:text-xl">{{ slide.description }}</p>
+            <button class="bg-linear-to-br from-blue-500 to-purple-600 text-white border-none px-8 py-4 rounded-full text-lg font-semibold cursor-pointer transition-all duration-300 shadow-lg shadow-blue-500/30 uppercase tracking-wide hover:shadow-xl hover:shadow-blue-500/40 hover:-translate-y-1 hover:from-blue-600 hover:to-purple-700 lg:px-6 lg:py-3 lg:text-base xl:px-8 xl:py-4 xl:text-lg" @click="handleCategoryClick(slide.category)">
               Ver Coleção
             </button>
           </div>
@@ -26,46 +24,80 @@
     </div>
 
     <!-- Indicadores -->
-    <div class="indicators">
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">
       <button
         v-for="(slide, index) in slides"
         :key="index"
-        class="indicator"
-        :class="{ active: index === currentSlide }"
+        class="w-3 h-3 rounded-full border-2 border-white/70 bg-transparent cursor-pointer transition-all duration-300 hover:border-white hover:scale-110"
+        :class="{ 'bg-white border-white scale-125': index === currentSlide }"
         @click="goToSlide(index)"
       ></button>
     </div>
 
     <!-- Navegação -->
-    <button class="nav-button prev" @click="prevSlide">
+    <button class="absolute top-1/2 -translate-y-1/2 left-8 bg-white/90 border-none w-12 h-12 rounded-full cursor-pointer flex items-center justify-center transition-all duration-300 z-20 shadow-lg shadow-black/10 hover:bg-white hover:scale-110 hover:shadow-xl hover:shadow-black/20 lg:left-4 xl:left-8" @click="prevSlide">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M15 18l-6-6 6-6"/>
       </svg>
     </button>
-    <button class="nav-button next" @click="nextSlide">
+    <button class="absolute top-1/2 -translate-y-1/2 right-8 bg-white/90 border-none w-12 h-12 rounded-full cursor-pointer flex items-center justify-center transition-all duration-300 z-20 shadow-lg shadow-black/10 hover:bg-white hover:scale-110 hover:shadow-xl hover:shadow-black/20 lg:right-4 xl:right-8" @click="nextSlide">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M9 18l6-6-6-6"/>
       </svg>
     </button>
   </div>
+
+  <!-- Banner mobile -->
+  <div class="relative w-full h-[400px] overflow-hidden rounded-xl shadow-2xl shadow-black/10 lg:hidden">
+    <div class="flex h-full transition-transform duration-700 ease-out" :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
+      <div
+        v-for="(slide, index) in slides"
+        :key="index"
+        class="min-w-full h-full relative flex flex-col"
+      >
+        <div class="relative w-full h-3/5 overflow-hidden flex items-center justify-center">
+          <img :src="slide.image" :alt="slide.title" class="max-w-full max-h-full object-contain transition-transform duration-500 ease-out hover:scale-105" />
+          <div class="absolute inset-0 bg-linear-to-br from-black/30 to-black/10"></div>
+        </div>
+        <div class="w-full h-2/5 p-6 text-white text-center">
+          <h2 class="text-3xl font-bold mb-2 drop-shadow-2xl tracking-tight sm:text-4xl">{{ slide.title }}</h2>
+          <p class="text-base mb-6 opacity-90 leading-relaxed sm:text-lg">{{ slide.description }}</p>
+          <button class="bg-linear-to-br from-blue-500 to-purple-600 text-white border-none px-6 py-3 rounded-full text-base font-semibold cursor-pointer transition-all duration-300 shadow-lg shadow-blue-500/30 uppercase tracking-wide hover:shadow-xl hover:shadow-blue-500/40 hover:-translate-y-1 hover:from-blue-600 hover:to-purple-700 sm:px-8 sm:py-4 sm:text-lg" @click="handleCategoryClick(slide.category)">
+            Ver Coleção
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Indicadores mobile -->
+    <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+      <button
+        v-for="(slide, index) in slides"
+        :key="index"
+        class="w-3 h-3 rounded-full border-2 border-white/70 bg-transparent cursor-pointer transition-all duration-300 hover:border-white hover:scale-110"
+        :class="{ 'bg-white border-white scale-125': index === currentSlide }"
+        @click="goToSlide(index)"
+      ></button>
+    </div>
+  </div>
     <!-- Faixa de Anúncios Rolante -->
-    <div class="announcement-ticker">
-    <div class="ticker-content">
-      <div class="ticker-item" v-for="(partner, index) in partners" :key="index">
-        <div class="partner-info">
-          <div class="partner-icon" v-html="partner.icon"></div>
-          <span class="partner-name">{{ partner.name }}</span>
-          <span v-if="partner.discount" class="partner-discount">{{ partner.discount }}</span>
-          <span v-if="partner.news" class="partner-news">{{ partner.news }}</span>
+    <div class="bg-linear-to-br from-blue-500 to-purple-600 text-white overflow-hidden relative h-12 flex items-center shadow-lg shadow-black/10 sm:h-11 md:h-12">
+    <div class="flex items-center whitespace-nowrap animate-scroll-left hover:pause px-4 sm:px-6 md:px-8">
+      <div class="flex items-center mr-8 sm:mr-10 md:mr-12 flex-shrink-0" v-for="(partner, index) in partners" :key="index">
+        <div class="flex items-center gap-2 sm:gap-3 font-medium text-xs sm:text-sm">
+          <div class="flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-white/20 rounded-full flex-shrink-0 transition-all duration-300 hover:bg-white/30 hover:scale-110" v-html="partner.icon"></div>
+          <span class="font-semibold tracking-wide">{{ partner.name }}</span>
+          <span v-if="partner.discount" class="bg-red-500 text-white px-1.5 py-0.5 sm:px-2 rounded-lg text-xs font-bold animate-pulse">{{ partner.discount }}</span>
+          <span v-if="partner.news" class="bg-teal-400 text-white px-1.5 py-0.5 sm:px-2 rounded-lg text-xs font-bold animate-bounce">{{ partner.news }}</span>
         </div>
       </div>
       <!-- Duplicar o conteúdo para efeito de rolagem infinita -->
-      <div class="ticker-item" v-for="(partner, index) in partners" :key="`dup-${index}`">
-        <div class="partner-info">
-          <div class="partner-icon" v-html="partner.icon"></div>
-          <span class="partner-name">{{ partner.name }}</span>
-          <span v-if="partner.discount" class="partner-discount">{{ partner.discount }}</span>
-          <span v-if="partner.news" class="partner-news">{{ partner.news }}</span>
+      <div class="flex items-center mr-8 sm:mr-10 md:mr-12 flex-shrink-0" v-for="(partner, index) in partners" :key="`dup-${index}`">
+        <div class="flex items-center gap-2 sm:gap-3 font-medium text-xs sm:text-sm">
+          <div class="flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-white/20 rounded-full flex-shrink-0 transition-all duration-300 hover:bg-white/30 hover:scale-110" v-html="partner.icon"></div>
+          <span class="font-semibold tracking-wide">{{ partner.name }}</span>
+          <span v-if="partner.discount" class="bg-red-500 text-white px-1.5 py-0.5 sm:px-2 rounded-lg text-xs font-bold animate-pulse">{{ partner.discount }}</span>
+          <span v-if="partner.news" class="bg-teal-400 text-white px-1.5 py-0.5 sm:px-2 rounded-lg text-xs font-bold animate-bounce">{{ partner.news }}</span>
         </div>
       </div>
     </div>
@@ -188,424 +220,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  stopAutoPlay()
+
 })
+
 </script>
-
-<style scoped>
-.banner-container {
-  position: relative;
-  width: 100%;
-  height: 500px;
-  overflow: hidden;
-  border-radius: 16px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-.banner-slider {
-  display: flex;
-  height: 100%;
-  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.slide {
-  min-width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.slide-content {
-  display: flex;
-  height: 100%;
-  position: relative;
-}
-
-.slide-image {
-  position: relative;
-  width: 60%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.slide-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
-}
-
-.slide:hover .slide-image img {
-  transform: scale(1.05);
-}
-
-.slide-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
-}
-
-.slide-info {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40%;
-  padding: 3rem;
-  color: white;
-  z-index: 2;
-}
-
-.slide-title {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  letter-spacing: -0.02em;
-}
-
-.slide-description {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-  opacity: 0.9;
-  line-height: 1.6;
-}
-
-.slide-button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.slide-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
-  background: linear-gradient(135deg, #5a6fd8 0%, #6b4190 100%);
-}
-
-/* Indicadores */
-.indicators {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 0.75rem;
-  z-index: 3;
-}
-
-.indicator {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.7);
-  background: transparent;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.indicator.active {
-  background: white;
-  border-color: white;
-  transform: scale(1.2);
-}
-
-.indicator:hover {
-  border-color: white;
-  transform: scale(1.1);
-}
-
-/* Botões de navegação */
-.nav-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.9);
-  border: none;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  z-index: 3;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.nav-button:hover {
-  background: white;
-  transform: translateY(-50%) scale(1.1);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-}
-
-.nav-button.prev {
-  left: 2rem;
-}
-
-.nav-button.next {
-  right: 2rem;
-}
-
-/* Responsividade */
-@media (max-width: 1024px) {
-  .slide-info {
-    width: 50%;
-    padding: 2rem;
-  }
-
-  .slide-title {
-    font-size: 2.5rem;
-  }
-
-  .slide-description {
-    font-size: 1.1rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .banner-container {
-    height: 400px;
-  }
-
-  .slide-content {
-    flex-direction: column;
-  }
-
-  .slide-image {
-    width: 100%;
-    height: 60%;
-  }
-
-  .slide-info {
-    position: static;
-    width: 100%;
-    height: 40%;
-    padding: 2rem 1.5rem;
-    transform: none;
-    text-align: center;
-  }
-
-  .slide-title {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .slide-description {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .nav-button {
-    display: none;
-  }
-
-  .indicators {
-    bottom: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .banner-container {
-    height: 350px;
-    border-radius: 12px;
-  }
-
-  .slide-info {
-    padding: 1.5rem 1rem;
-  }
-
-  .slide-title {
-    font-size: 1.8rem;
-  }
-
-  .slide-button {
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-  }
-}
-
-/* Faixa de Anúncios Rolante */
-.announcement-ticker {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  overflow: hidden;
-  position: relative;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.ticker-content {
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  animation: scroll-left 30s linear infinite;
-  padding: 0 2rem;
-}
-
-.ticker-content:hover {
-  animation-play-state: paused;
-}
-
-.ticker-item {
-  display: flex;
-  align-items: center;
-  margin-right: 3rem;
-  flex-shrink: 0;
-}
-
-.partner-info {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-weight: 500;
-  font-size: 0.95rem;
-}
-
-.partner-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  flex-shrink: 0;
-  transition: all 0.3s ease;
-}
-
-.partner-icon:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.1);
-}
-
-.partner-icon svg {
-  width: 16px;
-  height: 16px;
-}
-
-.partner-name {
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-.partner-discount {
-  background: #ff6b6b;
-  color: white;
-  padding: 0.2rem 0.6rem;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  animation: pulse 2s infinite;
-}
-
-.partner-news {
-  background: #4ecdc4;
-  color: white;
-  padding: 0.2rem 0.6rem;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  animation: bounce 2s infinite;
-}
-
-/* Animações */
-@keyframes scroll-left {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-3px);
-  }
-  60% {
-    transform: translateY(-2px);
-  }
-}
-
-/* Responsividade para a faixa */
-@media (max-width: 768px) {
-  .announcement-ticker {
-    height: 45px;
-  }
-
-  .ticker-content {
-    animation-duration: 20s;
-    padding: 0 1rem;
-  }
-
-  .ticker-item {
-    margin-right: 2rem;
-  }
-
-  .partner-info {
-    gap: 0.5rem;
-    font-size: 0.85rem;
-  }
-
-  .partner-icon {
-    width: 28px;
-    height: 28px;
-  }
-
-  .partner-icon svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  .partner-discount,
-  .partner-news {
-    font-size: 0.7rem;
-    padding: 0.15rem 0.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .announcement-ticker {
-    height: 40px;
-  }
-
-  .ticker-content {
-    animation-duration: 15s;
-  }
-
-  .ticker-item {
-    margin-right: 1.5rem;
-  }
-
-  .partner-info {
-    font-size: 0.8rem;
-  }
-}
-</style>
